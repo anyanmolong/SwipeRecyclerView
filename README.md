@@ -1,5 +1,29 @@
 ﻿# SwipeRecyclerView
 
+### 新增BaseSwipeViewHolder类
+说明： BaseSwipeViewHolder类是引入jude:easyrecyclerview中Adapter的布局解耦，布局转由ViewHolder的设计， 继承于BaseViewHolder
+    (不支持不通过布局而是直接new View()的实现
+    设计上是希望实现布局和Adapter解耦化的同时还可以用在easyrecyclerview上(未测试)
+
+
+### 改动:SwipeMenuAdapter类
+说明：
+- 修改了onCreateViewHolder方法
+- 为BaseSwipeViewHolder配合进一步减少代码将抽象方法onCreateContentView改为实现
+- SwipeMenuAdapter目前兼容原有的RecyclerView.ViewHolder实现方式(在考虑是否要移除兼容)
+
+# 下一步
+1. 进一步简化适配器
+2. 将监听从适配器剥离出来(需要参考easyrecyclerview的实现
+3. 在BaseSwipeViewHolder中引入内部接口, 抽象掉图片加载, 在BaseSwipeViewHolder的实现类中做成抽象工厂模式的可替换图片加载
+(感觉测试不同图片加载框架时很方便， 但是否有必要这样做？ 是否陷入了过度设计？
+
+
+演示用改动测试类: AllMenuActivity, TestMenuAdapter
+
+
+
+
 严振杰的主页：[http://www.yanzhenjie.com][0]  
 严振杰的博客：[http://blog.yanzhenjie.com][1]  
 技术交流群：547839514，加群前请务必阅读[群行为规范][2]。  

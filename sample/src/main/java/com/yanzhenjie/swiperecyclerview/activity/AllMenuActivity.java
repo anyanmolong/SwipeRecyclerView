@@ -30,11 +30,12 @@ import android.widget.Toast;
 import com.yanzhenjie.recyclerview.swipe.Closeable;
 import com.yanzhenjie.recyclerview.swipe.OnSwipeMenuItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuAdapter;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import com.yanzhenjie.swiperecyclerview.R;
-import com.yanzhenjie.swiperecyclerview.adapter.MenuAdapter;
+import com.yanzhenjie.swiperecyclerview.adapter.TestMenuAdapter;
 import com.yanzhenjie.swiperecyclerview.listener.OnItemClickListener;
 import com.yanzhenjie.swiperecyclerview.view.ListViewDecoration;
 
@@ -50,7 +51,8 @@ public class AllMenuActivity extends AppCompatActivity {
 
     private Activity mContext;
 
-    private MenuAdapter mMenuAdapter;
+//    private MenuAdapter mMenuAdapter;
+    private SwipeMenuAdapter mMenuAdapter;
 
     private List<String> mStrings;
 
@@ -82,8 +84,11 @@ public class AllMenuActivity extends AppCompatActivity {
         // 设置菜单Item点击监听。
         mSwipeMenuRecyclerView.setSwipeMenuItemClickListener(menuItemClickListener);
 
-        mMenuAdapter = new MenuAdapter(mStrings);
-        mMenuAdapter.setOnItemClickListener(onItemClickListener);
+//        mMenuAdapter = new MenuAdapter(mStrings);
+//        mMenuAdapter.setOnItemClickListener(onItemClickListener);
+//        mSwipeMenuRecyclerView.setAdapter(mMenuAdapter);
+
+        mMenuAdapter = new TestMenuAdapter(mStrings);
         mSwipeMenuRecyclerView.setAdapter(mMenuAdapter);
     }
 

@@ -83,13 +83,16 @@ public abstract class SwipeMenuAdapter<VH extends RecyclerView.ViewHolder> exten
             }
 
             if (leftMenuCount > 0 || rightMenuCount > 0) {
+                if (contentView == null) {
+                    return onCompatCreateViewHolder(swipeMenuLayout, viewType);
+                }
+
                 ViewGroup viewGroup = (ViewGroup) swipeMenuLayout.findViewById(R.id.swipe_content);
                 viewGroup.addView(contentView);
                 contentView = swipeMenuLayout;
-
             }
         }
-        return onCompatCreateViewHolder(contentView, viewType);
+        return contentView == null ? onCompatCreateViewHolder(parent, viewType) : onCompatCreateViewHolder(contentView, viewType);
     }
 
     /**
@@ -99,7 +102,7 @@ public abstract class SwipeMenuAdapter<VH extends RecyclerView.ViewHolder> exten
      * @param viewType The view type of the new view.
      * @return A new ViewHolder that holds a View of the given view type.
      */
-    public abstract View onCreateContentView(ViewGroup parent, int viewType);
+    public View onCreateContentView(ViewGroup parent, int viewType){return null;}
 
     /**
      * Instead {@link #onCreateViewHolder(ViewGroup, int)}.
