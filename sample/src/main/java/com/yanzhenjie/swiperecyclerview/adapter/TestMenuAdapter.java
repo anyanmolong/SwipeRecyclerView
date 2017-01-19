@@ -20,7 +20,7 @@ import android.view.ViewGroup;
 
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuAdapter;
 import com.yanzhenjie.swiperecyclerview.listener.OnItemClickListener;
-import com.yanzhenjie.swiperecyclerview.viewholder.AdViewHolder;
+import com.yanzhenjie.swiperecyclerview.viewholder2.AdViewHolder;
 
 import java.util.List;
 

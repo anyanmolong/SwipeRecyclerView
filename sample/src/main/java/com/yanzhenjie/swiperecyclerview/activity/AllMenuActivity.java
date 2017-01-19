@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.yanzhenjie.recyclerview.swipe.BaseSwipeViewHolder;
 import com.yanzhenjie.recyclerview.swipe.Closeable;
 import com.yanzhenjie.recyclerview.swipe.OnSwipeMenuItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
@@ -35,9 +36,10 @@ import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import com.yanzhenjie.swiperecyclerview.R;
-import com.yanzhenjie.swiperecyclerview.adapter.TestMenuAdapter;
+import com.yanzhenjie.swiperecyclerview.adapter.SwipeRecyclerAdapter;
 import com.yanzhenjie.swiperecyclerview.listener.OnItemClickListener;
 import com.yanzhenjie.swiperecyclerview.view.ListViewDecoration;
+import com.yanzhenjie.swiperecyclerview.viewholder2.AdViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +53,7 @@ public class AllMenuActivity extends AppCompatActivity {
 
     private Activity mContext;
 
-//    private MenuAdapter mMenuAdapter;
+    //    private MenuAdapter mMenuAdapter;
     private SwipeMenuAdapter mMenuAdapter;
 
     private List<String> mStrings;
@@ -84,11 +86,30 @@ public class AllMenuActivity extends AppCompatActivity {
         // 设置菜单Item点击监听。
         mSwipeMenuRecyclerView.setSwipeMenuItemClickListener(menuItemClickListener);
 
-//        mMenuAdapter = new MenuAdapter(mStrings);
-//        mMenuAdapter.setOnItemClickListener(onItemClickListener);
-//        mSwipeMenuRecyclerView.setAdapter(mMenuAdapter);
 
-        mMenuAdapter = new TestMenuAdapter(mStrings);
+//        mMenuAdapter = new TestMenu2Adapter(mStrings);
+        mMenuAdapter = new SwipeRecyclerAdapter<String>(mStrings) {
+            @Override
+            public BaseSwipeViewHolder onCompatCreateViewHolder(ViewGroup realParent, int viewType) {
+                switch (viewType) {
+                    case 1:
+                        return new AdViewHolder(realParent);
+                    default:
+                        return new BaseSwipeViewHolder<String>(realParent, R.layout.item) {
+                            @Override
+                            public void setData(String data) {
+                                setText(R.id.tv_title, BaseSwipeViewHolder.class.getSimpleName()+"\n" + data.hashCode());
+                            }
+                        };
+                }
+            }
+
+            @Override
+            public int getItemViewType(int position) {
+                return getData(position).hashCode() % 2;
+            }
+        };
+
         mSwipeMenuRecyclerView.setAdapter(mMenuAdapter);
     }
 

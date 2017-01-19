@@ -1,4 +1,4 @@
-package com.yanzhenjie.swiperecyclerview.viewholder;
+package com.yanzhenjie.swiperecyclerview.viewholder2;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,28 +13,22 @@ import com.yanzhenjie.swiperecyclerview.listener.OnItemClickListener;
  */
 public class AdViewHolder extends BaseSwipeViewHolder<String> implements View.OnClickListener {
 
-
     public AdViewHolder(ViewGroup parent) {
         super(parent, R.layout.item);
-//        ImageView imageView = (ImageView) itemView;
-//        imageView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int)Utils.convertDpToPixel(156,getContext())));
-//        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
     }
 
     @Override
     public void setData(final String data) {
         tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
-        this.tvTitle.setText(data);
+        this.tvTitle.setText(AdViewHolder.class.getSimpleName() + data);
     }
 
     TextView tvTitle;
     OnItemClickListener mOnItemClickListener;
 
-
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.mOnItemClickListener = onItemClickListener;
     }
-
 
     @Override
     public void onClick(View v) {

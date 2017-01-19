@@ -33,14 +33,14 @@ abstract public class BaseSwipeViewHolder<M> extends BaseViewHolder<M> {
 
     private SparseArray<View> mViews;
 
-    /**
-     * 对SwipeMenuAdapter原先的写法做兼容， 考虑是否要删掉
-     * @param itemView
-     */
-    @Deprecated
-    public BaseSwipeViewHolder(View itemView) {
-        super(itemView);
-    }
+//    /**
+//     * 对SwipeMenuAdapter原先的写法做兼容， 考虑是否要删掉
+//     * @param itemView
+//     */
+//    @Deprecated
+//    public BaseSwipeViewHolder(View itemView) {
+//        super(itemView);
+//    }
 
     public BaseSwipeViewHolder(ViewGroup parent, @LayoutRes int res) {
         super(compatCreateView(parent, res));
