@@ -4,7 +4,7 @@ import android.view.ViewGroup;
 
 import com.yanzhenjie.recyclerview.swipe.BaseSwipeViewHolder;
 import com.yanzhenjie.swiperecyclerview.R;
-import com.yanzhenjie.swiperecyclerview.viewholder2.AdViewHolder;
+import com.yanzhenjie.swiperecyclerview.viewholder.AdViewHolder;
 
 import java.util.List;
 

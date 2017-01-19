@@ -1,4 +1,4 @@
-package com.yanzhenjie.swiperecyclerview.viewholder2;
+package com.yanzhenjie.swiperecyclerview.viewholder;
 
 import android.view.View;
 import android.view.ViewGroup;

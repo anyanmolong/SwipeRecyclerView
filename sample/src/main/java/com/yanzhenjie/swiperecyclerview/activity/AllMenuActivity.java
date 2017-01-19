@@ -39,7 +39,7 @@ import com.yanzhenjie.swiperecyclerview.R;
 import com.yanzhenjie.swiperecyclerview.adapter.SwipeRecyclerAdapter;
 import com.yanzhenjie.swiperecyclerview.listener.OnItemClickListener;
 import com.yanzhenjie.swiperecyclerview.view.ListViewDecoration;
-import com.yanzhenjie.swiperecyclerview.viewholder2.AdViewHolder;
+import com.yanzhenjie.swiperecyclerview.viewholder.AdViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
