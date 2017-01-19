@@ -2,7 +2,8 @@ package com.yanzhenjie.swiperecyclerview.adapter;
 
 import android.view.ViewGroup;
 
-import com.yanzhenjie.recyclerview.swipe.BaseSwipeViewHolder;
+import com.yanzhenjie.recyclerview.swipe.SwipeViewHolder;
+import com.yanzhenjie.recyclerview.swipe.SwipeRecyclerAdapter;
 import com.yanzhenjie.swiperecyclerview.R;
 import com.yanzhenjie.swiperecyclerview.viewholder.AdViewHolder;
 
@@ -31,15 +32,15 @@ public class TestMenu2Adapter extends SwipeRecyclerAdapter<String> {
     }
 
     @Override
-    public BaseSwipeViewHolder onCompatCreateViewHolder(ViewGroup realParent, int viewType) {
+    public SwipeViewHolder onCompatCreateViewHolder(ViewGroup realParent, int viewType) {
         switch (viewType) {
             case 1:
                 return new AdViewHolder(realParent);
             default:
-                return new BaseSwipeViewHolder<String>(realParent, R.layout.item) {
+                return new SwipeViewHolder<String>(realParent, R.layout.item) {
                     @Override
                     public void setData(String data) {
-                        setText(R.id.tv_title, BaseSwipeViewHolder.class.getName() + data);
+                        setText(R.id.tv_title, SwipeViewHolder.class.getName() + data);
                     }
                 };
         }

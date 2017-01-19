@@ -13,15 +13,16 @@
 - SwipeMenuAdapter目前兼容原有的RecyclerView.ViewHolder实现方式(在考虑是否要移除兼容)
 
 # 下一步
-1. 进一步简化适配器
+1. 进一步简化适配器(-完成
 2. 将监听从适配器剥离出来(需要参考easyrecyclerview的实现
 3. 在BaseSwipeViewHolder中引入内部接口, 抽象掉图片加载, 在BaseSwipeViewHolder的实现类中做成抽象工厂模式的可替换图片加载
-(感觉测试不同图片加载框架时很方便， 但是否有必要这样做？ 是否陷入了过度设计？
-
+(感觉测试不同图片加载框架时很方便， 但是否有必要这样做？ 是否陷入了过度设计？(-完成
+4.ViewHolder类的子view辅助方法补充(-完成
+5.写个新演示页面，测试ViewHolder是否能在EasyRecyclerView中正常运行
 
 演示用改动测试类: AllMenuActivity, TestMenuAdapter
 
-
+----
 
 
 严振杰的主页：[http://www.yanzhenjie.com][0]  

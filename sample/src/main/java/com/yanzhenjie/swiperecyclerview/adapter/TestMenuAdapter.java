@@ -52,9 +52,14 @@ public class TestMenuAdapter extends SwipeMenuAdapter<AdViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(AdViewHolder holder, int position) {
+    public void onBindViewHolder(AdViewHolder holder, final int position) {
         holder.setData(titles.get(position));
-        holder.setOnItemClickListener(mOnItemClickListener);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mOnItemClickListener.onItemClick(position);
+            }
+        });
     }
 
 

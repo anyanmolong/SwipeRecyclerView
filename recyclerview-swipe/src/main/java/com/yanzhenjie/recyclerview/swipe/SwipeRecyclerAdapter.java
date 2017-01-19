@@ -1,10 +1,7 @@
-package com.yanzhenjie.swiperecyclerview.adapter;
+package com.yanzhenjie.recyclerview.swipe;
 
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.yanzhenjie.recyclerview.swipe.BaseSwipeViewHolder;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +12,7 @@ import java.util.List;
  *
  * @param <T>
  */
-public abstract class SwipeRecyclerAdapter<T> extends SwipeMenuAdapter<BaseSwipeViewHolder> {
+public abstract class SwipeRecyclerAdapter<T> extends SwipeMenuAdapter<SwipeViewHolder> {
     private List<T> datas;
 
     public SwipeRecyclerAdapter(List<T> datas) {
@@ -31,14 +28,14 @@ public abstract class SwipeRecyclerAdapter<T> extends SwipeMenuAdapter<BaseSwipe
     }
 
     @Override
-    public final void onBindViewHolder(BaseSwipeViewHolder holder, int position) {
+    public final void onBindViewHolder(SwipeViewHolder holder, int position) {
         holder.setData(datas.get(position));
     }
 
-    abstract public BaseSwipeViewHolder onCompatCreateViewHolder(ViewGroup realParent, int viewType);
+    abstract public SwipeViewHolder onCompatCreateViewHolder(ViewGroup realParent, int viewType);
 
     @Override
-    public final BaseSwipeViewHolder onCompatCreateViewHolder(View realContentView, int viewType){
+    public final SwipeViewHolder onCompatCreateViewHolder(View realContentView, int viewType) {
         return onCompatCreateViewHolder((ViewGroup) realContentView, viewType);
     }
 
@@ -54,16 +51,16 @@ public abstract class SwipeRecyclerAdapter<T> extends SwipeMenuAdapter<BaseSwipe
         return datas == null ? 0 : datas.size();
     }
 
-    public void setDatas(List<T> mDatas) {
-        this.datas = mDatas;
+    public void setDatas(List<T> datas) {
+        this.datas = datas;
     }
 
     public List<T> getDatas() {
         return datas;
     }
 
-    public void updateAdapter(List<T> mDatas) {
-        this.datas = mDatas;
+    public void updateAdapter(List<T> datas) {
+        setDatas(datas);
         notifyDataSetChanged();
     }
 

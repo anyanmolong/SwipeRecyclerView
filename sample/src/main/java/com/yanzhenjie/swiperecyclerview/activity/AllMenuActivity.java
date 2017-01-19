@@ -27,7 +27,6 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.yanzhenjie.recyclerview.swipe.BaseSwipeViewHolder;
 import com.yanzhenjie.recyclerview.swipe.Closeable;
 import com.yanzhenjie.recyclerview.swipe.OnSwipeMenuItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
@@ -35,8 +34,10 @@ import com.yanzhenjie.recyclerview.swipe.SwipeMenuAdapter;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
+import com.yanzhenjie.recyclerview.swipe.SwipeRecyclerAdapter;
+import com.yanzhenjie.recyclerview.swipe.SwipeViewHolder;
 import com.yanzhenjie.swiperecyclerview.R;
-import com.yanzhenjie.swiperecyclerview.adapter.SwipeRecyclerAdapter;
+import com.yanzhenjie.swiperecyclerview.adapter.TestMenu2Adapter;
 import com.yanzhenjie.swiperecyclerview.listener.OnItemClickListener;
 import com.yanzhenjie.swiperecyclerview.view.ListViewDecoration;
 import com.yanzhenjie.swiperecyclerview.viewholder.AdViewHolder;
@@ -87,18 +88,18 @@ public class AllMenuActivity extends AppCompatActivity {
         mSwipeMenuRecyclerView.setSwipeMenuItemClickListener(menuItemClickListener);
 
 
-//        mMenuAdapter = new TestMenu2Adapter(mStrings);
+        mMenuAdapter = new TestMenu2Adapter(mStrings);
         mMenuAdapter = new SwipeRecyclerAdapter<String>(mStrings) {
             @Override
-            public BaseSwipeViewHolder onCompatCreateViewHolder(ViewGroup realParent, int viewType) {
+            public SwipeViewHolder onCompatCreateViewHolder(ViewGroup realParent, int viewType) {
                 switch (viewType) {
                     case 1:
                         return new AdViewHolder(realParent);
                     default:
-                        return new BaseSwipeViewHolder<String>(realParent, R.layout.item) {
+                        return new SwipeViewHolder<String>(realParent, R.layout.item) {
                             @Override
                             public void setData(String data) {
-                                setText(R.id.tv_title, BaseSwipeViewHolder.class.getSimpleName()+"\n" + data.hashCode());
+                                setText(R.id.tv_title, SwipeViewHolder.class.getSimpleName() + "\n" + data.hashCode());
                             }
                         };
                 }
@@ -107,6 +108,12 @@ public class AllMenuActivity extends AppCompatActivity {
             @Override
             public int getItemViewType(int position) {
                 return getData(position).hashCode() % 2;
+            }
+        };
+        mMenuAdapter = new SwipeRecyclerAdapter<String>(mStrings) {
+            @Override
+            public SwipeViewHolder onCompatCreateViewHolder(ViewGroup realParent, int viewType) {
+                return new AdViewHolder(realParent);
             }
         };
 
