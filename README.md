@@ -2,7 +2,8 @@
 
 ###使用
 SwipeRecyclerAdapter类和SwipeViewHolder类
-'''mMenuAdapter = new SwipeRecyclerAdapter<String>(mStrings) {
+'''
+mMenuAdapter = new SwipeRecyclerAdapter<String>(mStrings) {
             @Override
             public SwipeViewHolder onCompatCreateViewHolder(ViewGroup realParent, int viewType) {
                 switch (viewType) {
