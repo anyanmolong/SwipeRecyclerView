@@ -49,6 +49,8 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
  * <p>
  * ViewHolder中参考了一些base-adapter-helper的辅助方法写法
  *
+ * Created by YXC on 2017/1/19.
+ *
  * @param <M>
  */
 abstract public class SwipeViewHolder<M> extends BaseViewHolder<M> {

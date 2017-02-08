@@ -10,6 +10,8 @@ import java.util.List;
  * 结合SwipeRecyclerView的SwipeMenuAdapter和EasyRecyclerView中的BaseViewHolder实现的持有者和适配器
  * 注：和BaseSwipeViewHolder
  *
+ * Created by YXC on 2017/1/19.
+ *
  * @param <T>
  */
 public abstract class SwipeRecyclerAdapter<T> extends SwipeMenuAdapter<SwipeViewHolder> {
