@@ -2,7 +2,7 @@
 
 ###使用
 SwipeRecyclerAdapter类和SwipeViewHolder类
-'''
+```
 mMenuAdapter = new SwipeRecyclerAdapter<String>(mStrings) {
             @Override
             public SwipeViewHolder onCompatCreateViewHolder(ViewGroup realParent, int viewType) {
@@ -24,7 +24,7 @@ mMenuAdapter = new SwipeRecyclerAdapter<String>(mStrings) {
                 return getData(position).hashCode() % 2;
             }
         };
-'''
+```
 
 ---
 更新记录
