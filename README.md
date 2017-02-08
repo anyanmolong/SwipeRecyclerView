@@ -1,5 +1,33 @@
 ﻿# SwipeRecyclerView
 
+###使用
+SwipeRecyclerAdapter类和SwipeViewHolder类
+'''mMenuAdapter = new SwipeRecyclerAdapter<String>(mStrings) {
+            @Override
+            public SwipeViewHolder onCompatCreateViewHolder(ViewGroup realParent, int viewType) {
+                switch (viewType) {
+                    case 1:
+                        return new AdViewHolder(realParent);
+                    default:
+                        return new SwipeViewHolder<String>(realParent, R.layout.item) {
+                            @Override
+                            public void setData(String data) {
+                                setText(R.id.tv_title, SwipeViewHolder.class.getSimpleName() + "\n" + data.hashCode());
+                            }
+                        };
+                }
+            }
+
+            @Override
+            public int getItemViewType(int position) {
+                return getData(position).hashCode() % 2;
+            }
+        };
+'''
+
+---
+更新记录
+
 ### 新增BaseSwipeViewHolder类
 说明： BaseSwipeViewHolder类是引入jude:easyrecyclerview中Adapter的布局解耦，布局转由ViewHolder的设计， 继承于BaseViewHolder
     (不支持不通过布局而是直接new View()的实现
