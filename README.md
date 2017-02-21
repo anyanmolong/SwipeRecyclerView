@@ -1,7 +1,24 @@
 ﻿# SwipeRecyclerView
 
+# 引用方法 
+* AndroidStudio使用Gradle构建添加依赖（推荐）  
+```
+android{
+    ......
+    allprojects {
+        repositories {
+            jcenter()
+            maven { url "https://jitpack.io" }
+        }
+    }
+}
+
+compile 'com.github.anyanmolong:SwipeRecyclerView:1.0.3'
+```
+
 ###使用
 SwipeRecyclerAdapter类和SwipeViewHolder类
+
 ######栗子
 ```
 // 适配器
