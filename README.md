@@ -1,8 +1,27 @@
 ﻿# SwipeRecyclerView
 
+# 引用方法 
+* AndroidStudio使用Gradle构建添加依赖（推荐）  
+```
+android{
+    ......
+    allprojects {
+        repositories {
+            jcenter()
+            maven { url "https://jitpack.io" }
+        }
+    }
+}
+
+compile 'com.github.anyanmolong:SwipeRecyclerView:1.0.3'
+```
+
 ###使用
 SwipeRecyclerAdapter类和SwipeViewHolder类
-'''
+
+######栗子
+```
+// 适配器
 mMenuAdapter = new SwipeRecyclerAdapter<String>(mStrings) {
             @Override
             public SwipeViewHolder onCompatCreateViewHolder(ViewGroup realParent, int viewType) {
@@ -24,7 +43,22 @@ mMenuAdapter = new SwipeRecyclerAdapter<String>(mStrings) {
                 return getData(position).hashCode() % 2;
             }
         };
-'''
+```
+ViewHolder推荐参考sample模块下com/yanzhenjie/swiperecyclerview/viewholder包的BaseViewHolder写法
+```
+// 效果
+public class AdViewHolder extends BaseViewHolder<String>{
+    public AdViewHolder(ViewGroup parent) {
+        super(parent, R.layout.item);
+    }
+
+    @Override
+    public void setData(final String data) {
+        setText(R.id.tv_title, AdViewHolder.class.getSimpleName() + data);
+    }
+
+}
+```
 
 ---
 更新记录
