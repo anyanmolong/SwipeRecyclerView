@@ -1,7 +1,9 @@
 ﻿# SwipeRecyclerView
+该项目在recyclerview-swipe:1.0.2的基础上对适配器做了一些改动，
+使ViewHolder剥离出来，并且和easyrecyclerview兼容（项目已引入easyrecyclerview）
 
-# 引用方法 
-* AndroidStudio使用Gradle构建添加依赖（推荐）  
+# 引用方法
+AndroidStudio使用Gradle构建添加依赖（推荐）
 ```
 android{
     ......
@@ -13,10 +15,20 @@ android{
     }
 }
 
-compile 'com.github.anyanmolong:SwipeRecyclerView:1.0.3'
+compile 'com.github.anyanmolong:SwipeRecyclerView:1.0.4'
 ```
 
-###使用
+##使用介绍
+使用上适配器还是使用easy的RecyclerArrayAdapter和Swipe的SwipeMenuAdapter不变
+ViewHolder则两者的适配器可以共用SwipeViewHolder类
+比较推荐的实现是写一个BaseViewHolder继承于SwipeViewHolder,具体可以参考demo(推荐)
+####注意：
+SwipeViewHolder的快捷方法setImageUrl(),需要在构造函数中传入LoadUrlImageSupport接口来实现具体的图片加载功能
+(因为默认并没有引入图片加载框架。当然，无视setImageUrl()自己另外写实现也OK)
+
+######引用的开源项目版本：
+'com.yanzhenjie:recyclerview-swipe:1.0.2'
+'com.jude:easyrecyclerview:4.3.1'
 SwipeRecyclerAdapter类和SwipeViewHolder类
 
 ######栗子
@@ -44,9 +56,9 @@ mMenuAdapter = new SwipeRecyclerAdapter<String>(mStrings) {
             }
         };
 ```
-ViewHolder推荐参考sample模块下com/yanzhenjie/swiperecyclerview/viewholder包的BaseViewHolder写法
+ViewHolder
 ```
-// 效果
+// ViewHolder
 public class AdViewHolder extends BaseViewHolder<String>{
     public AdViewHolder(ViewGroup parent) {
         super(parent, R.layout.item);
@@ -66,7 +78,7 @@ public class AdViewHolder extends BaseViewHolder<String>{
 ### 新增BaseSwipeViewHolder类
 说明： BaseSwipeViewHolder类是引入jude:easyrecyclerview中Adapter的布局解耦，布局转由ViewHolder的设计， 继承于BaseViewHolder
     (不支持不通过布局而是直接new View()的实现
-    设计上是希望实现布局和Adapter解耦化的同时还可以用在easyrecyclerview上(未测试)
+    设计上是希望实现布局和Adapter解耦化的同时还可以用在easyrecyclerview上(目前已测试通过)
 
 
 ### 改动:SwipeMenuAdapter类
@@ -75,7 +87,7 @@ public class AdViewHolder extends BaseViewHolder<String>{
 - 为BaseSwipeViewHolder配合进一步减少代码将抽象方法onCreateContentView改为实现
 - SwipeMenuAdapter目前兼容原有的RecyclerView.ViewHolder实现方式(在考虑是否要移除兼容)
 
-# 下一步
+## 下一步
 1. 进一步简化适配器(-完成
 2. 将监听从适配器剥离出来(需要参考easyrecyclerview的实现
 3. 在BaseSwipeViewHolder中引入内部接口, 抽象掉图片加载, 在BaseSwipeViewHolder的实现类中做成抽象工厂模式的可替换图片加载
