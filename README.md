@@ -15,7 +15,7 @@ android{
     }
 }
 
-compile 'com.github.anyanmolong:SwipeRecyclerView:1.0.4'
+compile 'com.github.anyanmolong:SwipeRecyclerView:1.0.3'
 ```
 
 ##使用介绍
