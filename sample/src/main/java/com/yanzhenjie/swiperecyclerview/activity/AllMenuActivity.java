@@ -96,6 +96,7 @@ public class AllMenuActivity extends AppCompatActivity {
                 switch (viewType) {
                     case 1:
                         return new AdViewHolder(realParent);
+                    case 2:
                     default:
                         return new BaseViewHolder<ImgBean>(realParent, R.layout.item_img) {
                             @Override
