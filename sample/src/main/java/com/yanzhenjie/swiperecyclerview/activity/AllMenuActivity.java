@@ -20,7 +20,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,14 +30,14 @@ import android.widget.Toast;
 import com.yanzhenjie.recyclerview.swipe.Closeable;
 import com.yanzhenjie.recyclerview.swipe.OnSwipeMenuItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuAdapter;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import com.yanzhenjie.recyclerview.swipe.SwipeRecyclerAdapter;
 import com.yanzhenjie.recyclerview.swipe.SwipeViewHolder;
 import com.yanzhenjie.swiperecyclerview.R;
-import com.yanzhenjie.swiperecyclerview.adapter.TestMenu2Adapter;
+import com.yanzhenjie.swiperecyclerview.base.recyclerview.BaseViewHolder;
+import com.yanzhenjie.swiperecyclerview.entity.ImgBean;
 import com.yanzhenjie.swiperecyclerview.listener.OnItemClickListener;
 import com.yanzhenjie.swiperecyclerview.view.ListViewDecoration;
 import com.yanzhenjie.swiperecyclerview.viewholder.AdViewHolder;
@@ -55,7 +55,7 @@ public class AllMenuActivity extends AppCompatActivity {
     private Activity mContext;
 
     //    private MenuAdapter mMenuAdapter;
-    private SwipeMenuAdapter mMenuAdapter;
+    private SwipeRecyclerAdapter mMenuAdapter;
 
     private List<String> mStrings;
 
@@ -72,12 +72,13 @@ public class AllMenuActivity extends AppCompatActivity {
         mContext = this;
 
         mStrings = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            mStrings.add("我是第" + i + "个。");
+        for (int i = 0; i < 10; i++) {
+            mStrings.add("我是第" + i + "个吱吱吱");
         }
         mSwipeMenuRecyclerView = (SwipeMenuRecyclerView) findViewById(R.id.recycler_view);
-        mSwipeMenuRecyclerView.setLayoutManager(new LinearLayoutManager(this));// 布局管理器。
-        mSwipeMenuRecyclerView.setHasFixedSize(true);// 如果Item够简单，高度是确定的，打开FixSize将提高性能。
+//        mSwipeMenuRecyclerView.setLayoutManager(new LinearLayoutManager(this));// 布局管理器。
+        mSwipeMenuRecyclerView.setLayoutManager(new GridLayoutManager(this,2));// 布局管理器。
+//        mSwipeMenuRecyclerView.setHasFixedSize(true);// 如果Item够简单，高度是确定的，打开FixSize将提高性能。
         mSwipeMenuRecyclerView.setItemAnimator(new DefaultItemAnimator());// 设置Item默认动画，加也行，不加也行。
         mSwipeMenuRecyclerView.addItemDecoration(new ListViewDecoration());// 添加分割线。
 
@@ -88,17 +89,17 @@ public class AllMenuActivity extends AppCompatActivity {
         mSwipeMenuRecyclerView.setSwipeMenuItemClickListener(menuItemClickListener);
 
 
-        mMenuAdapter = new TestMenu2Adapter(mStrings);
-        mMenuAdapter = new SwipeRecyclerAdapter<String>(mStrings) {
+//        mMenuAdapter = new TestMenu2Adapter(mStrings);
+        mMenuAdapter = new SwipeRecyclerAdapter<Object>() {
             @Override
             public SwipeViewHolder onCompatCreateViewHolder(ViewGroup realParent, int viewType) {
                 switch (viewType) {
                     case 1:
                         return new AdViewHolder(realParent);
                     default:
-                        return new SwipeViewHolder<String>(realParent, R.layout.item) {
+                        return new BaseViewHolder<ImgBean>(realParent, R.layout.item_img) {
                             @Override
-                            public void setData(String data) {
+                            public void setData(ImgBean data) {
                                 setText(R.id.tv_title, SwipeViewHolder.class.getSimpleName() + "\n" + data.hashCode());
                             }
                         };
@@ -107,15 +108,30 @@ public class AllMenuActivity extends AppCompatActivity {
 
             @Override
             public int getItemViewType(int position) {
-                return getData(position).hashCode() % 2;
+                if (getData(position) instanceof ImgBean) {
+                    return 2;
+                } else {
+                    return 1;
+                }
             }
         };
-        mMenuAdapter = new SwipeRecyclerAdapter<String>(mStrings) {
-            @Override
-            public SwipeViewHolder onCompatCreateViewHolder(ViewGroup realParent, int viewType) {
-                return new AdViewHolder(realParent);
-            }
-        };
+
+        List<ImgBean> list = new ArrayList<>();
+        list.add(new ImgBean());
+        list.add(new ImgBean());
+        list.add(new ImgBean());
+
+        mMenuAdapter.getDatas().addAll(list);
+
+        mMenuAdapter.getDatas().addAll(mStrings);
+
+        mMenuAdapter.getDatas().addAll(list);
+//        mMenuAdapter = new SwipeRecyclerAdapter<String>(mStrings) {
+//            @Override
+//            public SwipeViewHolder onCompatCreateViewHolder(ViewGroup realParent, int viewType) {
+//                return new AdViewHolder(realParent);
+//            }
+//        };
 
         mSwipeMenuRecyclerView.setAdapter(mMenuAdapter);
     }
@@ -208,7 +224,7 @@ public class AllMenuActivity extends AppCompatActivity {
 
             // TODO 如果是删除：推荐调用Adapter.notifyItemRemoved(position)，不推荐Adapter.notifyDataSetChanged();
             if (menuPosition == 0) {// 删除按钮被点击。
-                mStrings.remove(adapterPosition);
+                mMenuAdapter.getDatas().remove(adapterPosition);
                 mMenuAdapter.notifyItemRemoved(adapterPosition);
             }
         }
